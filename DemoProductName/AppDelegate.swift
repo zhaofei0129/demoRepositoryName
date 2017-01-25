@@ -16,6 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let tbc = UITabBarController()
+        let sub1VC = FirstSubViewController()
+        let sub2VC = SecondSubViewController()
+        let sub3VC = ThirdSubViewController()
+        tbc.viewControllers = [sub1VC, sub2VC, sub3VC]
+        let tabBar = tbc.tabBar
+        let items = tabBar.items
+        tabBar.barTintColor = UIColor.white
+        for i in 0...2 {
+            items?[i].title = "item\(i)"
+            items?[i].image = UIImage(named: "item_icon_\(i)")?.withRenderingMode(.alwaysOriginal)
+            items?[i].selectedImage = UIImage(named: "item_icon_selected_\(i)")?.withRenderingMode(.alwaysOriginal)
+        }
+
+        self.window?.rootViewController = tbc
         return true
     }
 
