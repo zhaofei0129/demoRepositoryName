@@ -17,6 +17,7 @@ class FirstSubViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.white
         scrollView = UIScrollView(frame: CGRect(x: 0, y: 30, width: SCREEN_WIDTH, height: 120))
         scrollView.delegate = self
         let btn0 = UIButton(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120))

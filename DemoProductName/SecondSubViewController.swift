@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import CoreLocation
 
-class SecondSubViewController: UIViewController {
+class SecondSubViewController: UIViewController, CLLocationManagerDelegate {
+    let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.yellow
+        let getLocationBtn = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        getLocationBtn.addTarget(self, action: #selector(clickGetLocationBtn), for: .touchUpInside)
+        getLocationBtn.backgroundColor = UIColor.red
+        getLocationBtn.setTitle("获取位置", for: .normal)
+        self.view.addSubview(getLocationBtn)
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,6 +29,20 @@ class SecondSubViewController: UIViewController {
     }
     
 
+    func clickGetLocationBtn() {
+        print("click")
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 5
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(locations.last!)
+    }
     /*
     // MARK: - Navigation
 
