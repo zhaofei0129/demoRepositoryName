@@ -40,10 +40,6 @@ class GetLocationViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.dataSource = self
         self.view.addSubview(tableView)
         
-//        let label = UILabel(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-//        label.backgroundColor = UIColor.green
-//        self.view.addSubview(label)
-//        label.text = str
     }
 
     override func didReceiveMemoryWarning() {
