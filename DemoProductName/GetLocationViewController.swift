@@ -9,7 +9,8 @@
 import UIKit
 
 class GetLocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let places = ["北京", "上海", "广州", "深圳", "杭州"]
+    var places: [String] = []
+    var headers: [String] = []
     
     
     override func viewDidLoad() {
@@ -18,6 +19,17 @@ class GetLocationViewController: UIViewController, UITableViewDelegate, UITableV
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.white
 
+        for i in 0...99 {
+            if i < 10 {
+                places.append("0\(i)")
+            } else {
+                places.append("\(i)")
+            }
+            if i % 10 == 0 {
+                headers.append("\(i / 10)")
+            }
+        }
+        
         self.title = "选择城市"
         let leftBtn = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancel))
         self.navigationItem.leftBarButtonItem = leftBtn
@@ -49,7 +61,7 @@ class GetLocationViewController: UIViewController, UITableViewDelegate, UITableV
         if section == 0 {
             return 1
         } else {
-            return places.count
+            return 10
         }
     }
     
@@ -60,34 +72,51 @@ class GetLocationViewController: UIViewController, UITableViewDelegate, UITableV
             cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
         }
         if indexPath.section == 0 {
-            cell?.textLabel?.text = place
+            cell?.textLabel?.text = locationPlace
         } else {
-            cell?.textLabel?.text = places[indexPath.row]
+            cell?.textLabel?.text = places[(indexPath.section - 1) * 10 + indexPath.row]
         }
         return cell!
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return headers.count + 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "当前定位的城市"
         } else {
-            return "所有城市"
+            return headers[section - 1]
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section > 0 {
-            place = places[indexPath.row]
+        if indexPath.section == 0 {
+            selectedPlace = locationPlace
+        } else {
+            selectedPlace = places[(indexPath.section - 1) * 10 + indexPath.row]
         }
-        print(place)
         self.dismiss(animated: true) {
             print("dismiss")
         }
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return headers
+    }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        var count = 0
+        for i in headers {
+            if i == title {
+                return count + 1
+            }
+            count += 1
+        }
+        
+        return 0
     }
     /*
     // MARK: - Navigation

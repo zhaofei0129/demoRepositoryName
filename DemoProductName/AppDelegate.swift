@@ -7,21 +7,35 @@
 //
 
 import UIKit
+import CoreLocation
 
 let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 
-var place = "北京"
+var locationPlace = ""
+var selectedPlace = ""
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-
+    var locationManager: CLLocationManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        Thread.sleep(forTimeInterval: 5.0)
+                
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+        
+        
+        
         let tbc = UITabBarController()
         let sub1VC = FirstSubViewController()
         let sub2VC = SecondSubViewController()
@@ -63,6 +77,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(locations.last!) { (placemarks: [CLPlacemark]?, error: Error?) in
+            if (placemarks?.count)! > 0 {
+                let placemark = placemarks?.first
+                //                print("位置: name -- \(placemark?.name)")
+                //                print("位置: thoroughfare -- \(placemark?.thoroughfare)")
+                //                print("位置: subThoroughfare -- \(placemark?.subThoroughfare)")
+                //                print("位置: locality -- \(placemark?.locality)")
+                //                print("位置: subLocality -- \(placemark?.subLocality)")
+                //                print("位置: administrativeArea -- \(placemark?.administrativeArea)")
+                //                print("位置: subAdministrativeArea -- \(placemark?.subAdministrativeArea)")
+                //                print("位置: postalCode -- \(placemark?.postalCode)")
+                //                print("位置: isoCountryCode -- \(placemark?.isoCountryCode)")
+                //                print("位置: country -- \(placemark?.country)")
+                //                print("位置: inlandWater -- \(placemark?.inlandWater)")
+                //                print("位置: ocean -- \(placemark?.ocean)")
+                //                print("位置: areasOfInterest -- \(placemark?.areasOfInterest)")
+                locationPlace = (placemark?.locality)!
+                selectedPlace = locationPlace
+            } else if error == nil {
+                print("Found no placemarks.")
+            } else {
+                print("error is \(error)")
+            }
+        }
+        locationManager.stopUpdatingLocation()
+    }
 }
 
