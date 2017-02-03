@@ -40,10 +40,7 @@ class FirstSubViewController: UIViewController, UIScrollViewDelegate {
         pageControl = UIPageControl(frame: CGRect(x: 0, y: scrollView.frame.origin.y + scrollView.frame.height - 20, width: SCREEN_WIDTH, height: 20))
         pageControl.numberOfPages = 3
         pageControl.isEnabled = false
-        //设置当前小点颜色
-        //pageControl.currentPageIndicatorTintColor = UIColor.black
-        //设置其余小点颜色
-        //pageControl.pageIndicatorTintColor = UIColor.red
+
         self.view.addSubview(pageControl)
     }
 
@@ -53,20 +50,28 @@ class FirstSubViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func clickBtn0() {
-        let alert = UIAlertController(title: "title", message: "message", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "cancelTitle", style: .cancel) { (alert: UIAlertAction) in
-            print("cancel")
-        }
-        let _default = UIAlertAction(title: "defaultTitle", style: .default) { (alert: UIAlertAction) in
-            print("default")
-        }
-        let destructive = UIAlertAction(title: "destructiveTitle", style: .destructive) { (alert: UIAlertAction) in
-            print("destructive")
-        }
-        alert.addAction(cancel)
-        alert.addAction(_default)
-        alert.addAction(destructive)
-        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "title", message: "message", preferredStyle: .alert)
+//        let cancel = UIAlertAction(title: "cancelTitle", style: .cancel) { (alert: UIAlertAction) in
+//            print("cancel")
+//        }
+//        let _default = UIAlertAction(title: "defaultTitle", style: .default) { (alert: UIAlertAction) in
+//            print("default")
+//        }
+//        let destructive = UIAlertAction(title: "destructiveTitle", style: .destructive) { (alert: UIAlertAction) in
+//            print("destructive")
+//        }
+//        alert.addAction(cancel)
+//        alert.addAction(_default)
+//        alert.addAction(destructive)
+//        self.present(alert, animated: true, completion: nil)
+        
+        // 打电话
+//        let telNumber = "18551867684"
+//        if #available(iOS 10.0, *) {
+//            UIApplication.shared.open(URL(string: "tel://\(telNumber)")!, options: ["" : ""], completionHandler: nil)
+//        } else {
+//            // Fallback on earlier versions
+//        }
     }
     
     func clickBtn1() {

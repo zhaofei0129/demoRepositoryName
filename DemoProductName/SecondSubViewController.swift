@@ -12,16 +12,22 @@ import CoreLocation
 class SecondSubViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     var location = CLLocation()
-
+//    let getLocationBtn = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let getLocationBtn = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        getLocationBtn.addTarget(self, action: #selector(clickGetLocationBtn(_:)), for: .touchUpInside)
-        getLocationBtn.backgroundColor = UIColor.red
-        getLocationBtn.setTitle("获取位置", for: .normal)
-        self.view.addSubview(getLocationBtn)
+        view.backgroundColor = UIColor.white
+        self.title = "sub2NC"
+        let leftBtn = UIBarButtonItem(title: place, style: .plain, target: self, action: #selector(getLocation))
+        self.navigationItem.leftBarButtonItem = leftBtn
+        
+//        getLocationBtn.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
+//        getLocationBtn.addTarget(self, action: #selector(clickGetLocationBtn(_:)), for: .touchUpInside)
+//        getLocationBtn.backgroundColor = UIColor.red
+//        getLocationBtn.setTitle(place, for: .normal)
+//        self.view.addSubview(getLocationBtn)
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -31,6 +37,11 @@ class SecondSubViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.leftBarButtonItem?.title = place
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,25 +50,30 @@ class SecondSubViewController: UIViewController, CLLocationManagerDelegate {
     
 
     func clickGetLocationBtn(_ sender: UIButton) {
-        print("click")
+        let getLocationVC = GetLocationViewController()
+        let getLocationNC = UINavigationController(rootViewController: getLocationVC)
+  
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
             if (placemarks?.count)! > 0 {
                 let placemark = placemarks?.first
-                print("位置: name -- \(placemark?.name)")
-                print("位置: thoroughfare -- \(placemark?.thoroughfare)")
-                print("位置: subThoroughfare -- \(placemark?.subThoroughfare)")
-                print("位置: locality -- \(placemark?.locality)")
-                print("位置: subLocality -- \(placemark?.subLocality)")
-                print("位置: administrativeArea -- \(placemark?.administrativeArea)")
-                print("位置: subAdministrativeArea -- \(placemark?.subAdministrativeArea)")
-                print("位置: postalCode -- \(placemark?.postalCode)")
-                print("位置: isoCountryCode -- \(placemark?.isoCountryCode)")
-                print("位置: country -- \(placemark?.country)")
-                print("位置: inlandWater -- \(placemark?.inlandWater)")
-                print("位置: ocean -- \(placemark?.ocean)")
-                print("位置: areasOfInterest -- \(placemark?.areasOfInterest)")
-                sender.setTitle(placemark?.locality, for: .normal)
+//                print("位置: name -- \(placemark?.name)")
+//                print("位置: thoroughfare -- \(placemark?.thoroughfare)")
+//                print("位置: subThoroughfare -- \(placemark?.subThoroughfare)")
+//                print("位置: locality -- \(placemark?.locality)")
+//                print("位置: subLocality -- \(placemark?.subLocality)")
+//                print("位置: administrativeArea -- \(placemark?.administrativeArea)")
+//                print("位置: subAdministrativeArea -- \(placemark?.subAdministrativeArea)")
+//                print("位置: postalCode -- \(placemark?.postalCode)")
+//                print("位置: isoCountryCode -- \(placemark?.isoCountryCode)")
+//                print("位置: country -- \(placemark?.country)")
+//                print("位置: inlandWater -- \(placemark?.inlandWater)")
+//                print("位置: ocean -- \(placemark?.ocean)")
+//                print("位置: areasOfInterest -- \(placemark?.areasOfInterest)")
+                place = (placemark?.locality)!
+                self.present(getLocationNC, animated: true) {
+                    print("present")
+                }
             } else if error == nil {
                 print("Found no placemarks.")
             } else {
@@ -69,8 +85,16 @@ class SecondSubViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last!
-        print(location)
     }
+    
+    func getLocation() {
+        let getLocationVC = GetLocationViewController()
+        let getLocationNC = UINavigationController(rootViewController: getLocationVC)
+        self.present(getLocationNC, animated: true) {
+            print("present getLocationNC")
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

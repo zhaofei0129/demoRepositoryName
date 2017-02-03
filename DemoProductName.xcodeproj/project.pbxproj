@@ -17,6 +17,7 @@
 		A4EC2AE01E38B96600D00537 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EC2ADE1E38B96600D00537 /* LaunchScreen.storyboard */; };
 		A4EC2AEB1E38B96700D00537 /* DemoProductNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC2AEA1E38B96700D00537 /* DemoProductNameTests.swift */; };
 		A4EC2AF61E38B96700D00537 /* DemoProductNameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC2AF51E38B96700D00537 /* DemoProductNameUITests.swift */; };
+		A4F11CDF1E42D5C700CA299E /* GetLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F11CDE1E42D5C700CA299E /* GetLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		A4EC2AF11E38B96700D00537 /* DemoProductNameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoProductNameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4EC2AF51E38B96700D00537 /* DemoProductNameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoProductNameUITests.swift; sourceTree = "<group>"; };
 		A4EC2AF71E38B96700D00537 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4F11CDE1E42D5C700CA299E /* GetLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				A4BEEB8A1E390641005DD3DE /* FirstSubViewController.swift */,
 				A4BEEB8C1E390653005DD3DE /* SecondSubViewController.swift */,
 				A4BEEB8E1E390661005DD3DE /* ThirdSubViewController.swift */,
+				A4F11CDE1E42D5C700CA299E /* GetLocationViewController.swift */,
 			);
 			path = DemoProductName;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4F11CDF1E42D5C700CA299E /* GetLocationViewController.swift in Sources */,
 				A4EC2AD81E38B96600D00537 /* ViewController.swift in Sources */,
 				A4BEEB8D1E390653005DD3DE /* SecondSubViewController.swift in Sources */,
 				A4EC2AD61E38B96600D00537 /* AppDelegate.swift in Sources */,

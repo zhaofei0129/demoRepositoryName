@@ -11,6 +11,7 @@ import UIKit
 let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 
+var place = "北京"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,12 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //Thread.sleep(forTimeInterval: 1.0)
+//        Thread.sleep(forTimeInterval: 5.0)
         let tbc = UITabBarController()
         let sub1VC = FirstSubViewController()
         let sub2VC = SecondSubViewController()
+        let sub2NC = UINavigationController(rootViewController: sub2VC)
         let sub3VC = ThirdSubViewController()
-        tbc.viewControllers = [sub1VC, sub2VC, sub3VC]
+        tbc.viewControllers = [sub1VC, sub2NC, sub3VC]
         let tabBar = tbc.tabBar
         let items = tabBar.items
         tabBar.barTintColor = UIColor.white
