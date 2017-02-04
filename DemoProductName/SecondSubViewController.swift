@@ -25,8 +25,8 @@ class SecondSubViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
 
         
-        self.title = "sub2NC"
-        let leftBtn = UIBarButtonItem(title: selectedPlace, style: .plain, target: self, action: #selector(getLocation))
+        self.navigationItem.title = "sub2NC"
+        let leftBtn = UIBarButtonItem(title: userDefaults.string(forKey: keyOfSelectedPlace), style: .plain, target: self, action: #selector(getLocation))
         self.navigationItem.leftBarButtonItem = leftBtn
         
 
@@ -35,7 +35,7 @@ class SecondSubViewController: UIViewController, CLLocationManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        if locationPlace != selectedPlace {
-            self.navigationItem.leftBarButtonItem?.title = selectedPlace
+            self.navigationItem.leftBarButtonItem?.title = userDefaults.string(forKey: keyOfSelectedPlace)
 //        }
     }
 
@@ -76,6 +76,7 @@ class SecondSubViewController: UIViewController, CLLocationManagerDelegate {
                 //                print("位置: inlandWater -- \(placemark?.inlandWater)")
                 //                print("位置: ocean -- \(placemark?.ocean)")
                 //                print("位置: areasOfInterest -- \(placemark?.areasOfInterest)")
+                // 设置定位地点
                 locationPlace = (placemark?.locality)!
                 print(locationPlace)
             } else if error == nil {

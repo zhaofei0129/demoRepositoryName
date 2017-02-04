@@ -90,10 +90,11 @@ class GetLocationViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
-            selectedPlace = locationPlace
+            userDefaults.set(locationPlace, forKey: keyOfSelectedPlace)
         } else {
-            selectedPlace = places[(indexPath.section - 1) * 10 + indexPath.row]
+            userDefaults.set(places[(indexPath.section - 1) * 10 + indexPath.row], forKey: keyOfSelectedPlace)
         }
+        userDefaults.synchronize()
         self.dismiss(animated: true) {
             print("dismiss")
         }
@@ -121,7 +122,7 @@ class GetLocationViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    
+    }
     */
 
 }

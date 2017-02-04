@@ -13,7 +13,9 @@ let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 
 var locationPlace = ""
-var selectedPlace = ""
+
+let userDefaults = UserDefaults.standard
+let keyOfSelectedPlace = "selectedPlace"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
@@ -95,8 +97,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 //                print("位置: inlandWater -- \(placemark?.inlandWater)")
                 //                print("位置: ocean -- \(placemark?.ocean)")
                 //                print("位置: areasOfInterest -- \(placemark?.areasOfInterest)")
+                // 设置定位地点
                 locationPlace = (placemark?.locality)!
-                selectedPlace = locationPlace
+                if userDefaults.string(forKey: keyOfSelectedPlace) == nil {
+                    userDefaults.set(locationPlace, forKey: keyOfSelectedPlace)
+                    userDefaults.synchronize()
+                }
             } else if error == nil {
                 print("Found no placemarks.")
             } else {
