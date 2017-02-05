@@ -40,8 +40,19 @@ class GetLocationViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.dataSource = self
         self.view.addSubview(tableView)
         
+        
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(refresh(control:)), for: .valueChanged)
+        tableView.addSubview(control)
+        control.beginRefreshing()
+        refresh(control: control)
     }
 
+    func refresh(control: UIRefreshControl) {
+        print("refresh")
+        control.endRefreshing()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
