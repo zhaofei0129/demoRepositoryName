@@ -37,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 //            application.registerForRemoteNotifications(matching: .alert)
 //        }
         
+        let plistPath = Bundle.main.path(forResource: "Property List", ofType: "plist")
+        let data = NSArray(contentsOfFile: plistPath!)
+        print(data![1])
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
